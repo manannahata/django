@@ -1,0 +1,67 @@
+{% extends 'main1.html' %}
+
+{% block content %}
+<html>
+<style>
+    .fakeimg {
+      background-color: #aaa;
+      width: 90%;
+      padding: 5%;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+    
+    /* Style the header */
+    .header {
+      padding: 8%;
+      text-align: center;
+      background: #1abc9c;
+      color: white;
+    }
+    
+    /* Increase the font size of the h1 element */
+    .header h1 {
+      font-size: 40px;
+    }
+    
+    </style>
+    </head>
+    <body>
+      {% csrf_token %}
+    <div class="header">
+        <h1>FEEDBACK SITE.COM</h1>
+        <p>A website created by us.</p>
+      </div>
+      <p>
+        {% for message in messages %}
+         {{message}} ,.!!!
+        {%endfor%}
+  
+      </p>
+      <!--<div class="fakeimg" style="height:20%;">Image</div>-->
+      <form action="upload" method="POST"  name="usrform">
+        {% csrf_token %}
+        ENTER THE USERID:<input type="text" name="userid"><br><br><br>
+        ENTER your name:<input type="text" name="user"><br><br><br>
+        
+        PROVIDE YOUR FEEDBACK:
+        <input type="text" name="feedback"><br>
+        <!--<input type="file" name="image"   enctype="multipart/form-data">-->
+        <input type="submit" value="SUBMIT"><br><br><br>
+      </form>
+
+      <form action="feedbackpage" method="POST" name="fbform">
+        {% csrf_token %}
+
+        <input type="submit" value="SEARCH FEEDBACK"><br><br><br> 
+
+        ENTER THE USERID:<input type="text" name="userid2"><br><br><br>
+      </form>
+      
+    <!--<p style="text-align: center;">Here we will be adding the type of disease</p><br><br>
+    <p style="text-align: center;">After this we will providde the decription</p><br><br>-->
+    </body>
+</html>
+    {% endblock %}

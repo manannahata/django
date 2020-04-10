@@ -1,0 +1,10 @@
+{% extends 'main1.html'%}
+
+{% block content %}
+<p>feedback:</p>
+<br><br>
+
+{% for f in feedb %}
+<p>{{ f.feedback }}</p>
+{% endfor %}
+{% endblock%}

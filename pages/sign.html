@@ -1,0 +1,106 @@
+{% extends 'main1.html'%}
+
+{% block content %}
+
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+input{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+button {
+  background-color: #ff8533;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1;
+}
+
+button:hover {
+  opacity:0.8;
+}
+
+  .container {
+    padding-left: 30%;
+    padding-right: 30%;
+  }
+
+
+</style>
+
+<script>
+ function valid()
+ {
+    var email = document.signup.email.value;
+    var pass_val = document.signup.pass.value;
+    var repass_val = document.signup.repass.value;
+    var x = /\S+@\S+\.\S+/.test(email);
+    if(!x)
+    {
+      alert("Please enter valid e-mail!");
+      document.signup.email.value = "";
+      document.signup.email.focus();
+      return false;
+    }
+    if(pass_val!=repass_val)
+    {
+      alert("Please make sure that passwords match!");
+      document.signup.pass.value = "";
+      document.signup.repass.value = "";
+      document.signup.pass.focus();
+      return false;
+    }
+    
+    return true;
+ }
+</script>
+</head>
+
+<body>
+<form action="main1" name="signup" onsubmit="return(valid())" method="POST">
+  {% csrf_token %}
+  <div class="container">
+    <p>
+      {% for message in messages %}
+       {{message}} ,please try another 
+      {%endfor%}
+
+    </p>
+    <h2>Sign Up</h2>
+    <p>Enter details to create an account.</p>
+    <hr>
+    <label for="fname"><b>First name</b></label>
+    <input type="text" placeholder="Enter first name" name="fname" required>
+    <label for="lname"><b>Last name</b></label>
+    <input type="text" placeholder="Enter last name" name="lname" required>
+    <label for="email"><b>E-mail</b></label>
+    <input type="text" placeholder="Enter e-mail" name="email" required>
+    <label for="phone"><b>Phone no.</b></label>
+    <input type="number" placeholder="Enter phone no." name="phone" required>
+    <label for="user"><b>Username</b></label>
+    <input type="text" placeholder="Enter username" name="user" required>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter password" name="pass" required>
+    <label for="repass"><b>Re-enter Password</b></label>
+    <input type="password" placeholder="Re-enter password" name="repass" required>
+    <div>
+      <button type="submit" style="font-style: italic;">Sign Up</button>
+    </div>
+  </div>
+</form>
+</body>
+</html>
+{% endblock %}
